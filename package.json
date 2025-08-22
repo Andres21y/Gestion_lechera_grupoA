@@ -1,0 +1,24 @@
+{
+  "name": "gestion_lechera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andres21y/Gestion_lechera_grupoA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andres21y/Gestion_lechera_grupoA/issues"
+  },
+  "homepage": "https://github.com/Andres21y/Gestion_lechera_grupoA#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

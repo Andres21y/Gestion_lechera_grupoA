@@ -36,6 +36,11 @@ app.get('/dashboard', (req, res) => {
 
 
 // Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en el puerto ${PORT}`);
+    });
+}
+
+// Exportamos la app para que Vercel pueda tomarla y ejecutarla como una función serverless.
+module.exports = app;

@@ -1,23 +1,30 @@
-// Importamos los módulos necesarios con la sintaxis de ESM
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Obtenemos la ruta del directorio actual de una manera compatible con ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require('express');
+const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta principal que sirve el index.html
+// Rutas para servir las páginas HTML
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
+});
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

@@ -1,20 +1,23 @@
-const express = require('express');
-const path = require('path');
+// Importamos los módulos necesarios con la sintaxis de ESM
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Obtenemos la ruta del directorio actual de una manera compatible con ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// 1. Define el directorio de archivos estáticos (public)
-//    __dirname es una variable de Node que te da la ruta del directorio actual del archivo.
-//    path.join() crea una ruta compatible con cualquier sistema operativo.
-const publicDirectoryPath = path.join(__dirname, 'public');
-app.use(express.static(publicDirectoryPath));
+// Servir archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
-// 2. Ruta principal que captura cualquier solicitud GET que no sea un archivo estático
-//    Esto asegura que si alguien va a la raíz o a otra ruta manejada por el frontend,
-//    reciba el archivo HTML principal.
-app.get('/*', (req, res) => {
+// Ruta principal que sirve el index.html
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 3. Exporta la aplicación para Vercel
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
+});

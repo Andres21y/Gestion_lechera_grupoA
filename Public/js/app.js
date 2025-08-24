@@ -1,23 +1,27 @@
-// Inicializmos componentes de Materialize aquí
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("===>", "start application");
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar componentes de Materialize (ej. menús desplegables, modales, etc.)
     M.AutoInit();
-    initApp()
 
-    function initApp() {
+    // Función para cargar componentes HTML
+    const loadComponent = (selector, url) => {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector(selector).innerHTML = data;
+            })
+            .catch(error => console.error(`Error al cargar el componente desde ${url}:`, error));
+    };
 
-        //  iniciamos el sidenav
-        setTimeout(() => {
-            const sidenavElems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(sidenavElems);
-        }, 100);
-
-        // Renderizar componentes
-        document.getElementById('navbar-container').innerHTML = Navbar.render();
-        /** document.getElementById('features-container').innerHTML = Features.render();
-         document.getElementById('stats-container').innerHTML = Stats.render();
-         document.getElementById('cta-container').innerHTML = Cta.render();
-         document.getElementById('footer-container').innerHTML = Footer.render();*/
+    // Cargar navbar y footer si los contenedores existen
+    if (document.getElementById('navbar-container')) {
+        // La ruta es relativa a la carpeta 'views' pero el servidor la resuelve desde la raíz.
+        // Como no podemos acceder a 'views' directamente, necesitamos rutas específicas en el servidor.
+        // Por ahora, lo haremos con un "truco" y luego lo mejoraremos.
+        // *** SOLUCIÓN TEMPORAL para el frontend ***
+        // Para una solución real y escalable, usaríamos un motor de plantillas.
+        loadComponent('#navbar-container', 'components/navbar.html');
+    }
+    if (document.getElementById('footer-container')) {
+        loadComponent('#footer-container', 'components/footer.html');
     }
 });

@@ -7,7 +7,20 @@ const PORT = process.env.PORT || 3000;
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rutas para servir las páginas HTML
+// --- RUTAS PARA COMPONENTES ---
+// Cuando el frontend pida '/components/navbar.html', le enviaremos el archivo real.
+app.get('/components/navbar.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
+});
+
+// Hacemos lo mismo para el footer.
+app.get('/components/footer.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
+});
+// --- FIN DE RUTAS PARA COMPONENTES ---
+
+
+// --- RUTAS PARA PÁGINAS PRINCIPALES ---
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
@@ -16,13 +29,11 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'register.html'));
-});
-
+// ... (resto de tus rutas de páginas) ...
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar componentes de Materialize (ej. menús desplegables, modales, etc.)
     M.AutoInit();
+console.log("aja que paso");
 
     // Función para cargar componentes HTML
     const loadComponent = (selector, url) => {
@@ -19,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Por ahora, lo haremos con un "truco" y luego lo mejoraremos.
         // *** SOLUCIÓN TEMPORAL para el frontend ***
         // Para una solución real y escalable, usaríamos un motor de plantillas.
-        loadComponent('#navbar-container', 'components/navbar.html');
+        loadComponent('#navbar-container', '/components/navbar.html');
     }
     if (document.getElementById('footer-container')) {
-        loadComponent('#footer-container', 'components/footer.html');
+        loadComponent('#footer-container', '/components/footer.html');
     }
 });
